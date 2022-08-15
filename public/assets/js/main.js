@@ -327,7 +327,7 @@
 })();
 
 function get_pathname(){
-  var pathname = "window.location.pathname"
+  var pathname = window.location.pathname;
   if (pathname.endsWith("/")){
     pathname = pathname.slice(0, -1);
   }

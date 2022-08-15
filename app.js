@@ -13,7 +13,7 @@ const Participant = require('./models/participant');
 const Shop = require('./models/shop');
 
 var app = express();
-require('dotenv').config()
+require('dotenv').config();
 //
 // view engine setup
 
