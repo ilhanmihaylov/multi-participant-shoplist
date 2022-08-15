@@ -13,9 +13,10 @@ const Participant = require('./models/participant');
 const Shop = require('./models/shop');
 
 var app = express();
+require('dotenv').config()
 //
 // view engine setup
-var database_url = ""
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -136,9 +137,7 @@ function onListening() {
 	debug('Listening on ' + bind);
 }
 
-
-
-mongoose.connect(database_url);
+mongoose.connect(process.env.DATABASE_URL);
 const database = mongoose.connection
 
 database.on('error', (error) => {
@@ -160,10 +159,10 @@ io.on('connection', (socket) => {
 	var joined = false;
 
 	setTimeout(() => {
-		if(!joined)
+		if (!joined)
 			socket.disconnect(true);
 
-	  }, "5000")
+	}, "5000")
 
 	socket.on('join_shop', async (msg) => {
 		console.log('user msg sent:' + msg);
@@ -182,9 +181,9 @@ io.on('connection', (socket) => {
 
 		if (!participant)
 			return socket.disconnect(true);
-		
+
 		socket.join(shopid)
 		joined = true;
-		console.log('user joined to shop: ' +shopid);
+		console.log('user joined to shop: ' + shopid);
 	});
 });
