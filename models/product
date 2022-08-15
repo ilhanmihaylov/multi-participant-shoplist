@@ -1,0 +1,14 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const product = new Schema({
+  name:  String,
+  createDate: { type: Date, default: Date.now },
+  shop_id: String,
+  participant_id: String,
+  complete: { type: Boolean, default: false },
+  you_buy: { type: Boolean, default: false },
+  you_buy_initiator_id: { type: String, default: ' ' },
+});
+
+module.exports = mongoose.model("Product", product);
