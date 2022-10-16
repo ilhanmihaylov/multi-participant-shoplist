@@ -8,41 +8,41 @@ const mongoose = require('mongoose');
 router.get('/:shopid/:participantid', async function (req, res, next) {
 
 	if (!mongoose.isValidObjectId(req.params.shopid) || !mongoose.isValidObjectId(req.params.participantid))
-		return res.render('index');
+		return res.render('404');
 
 	var shop = await Shop.findById(req.params.shopid.toString()).exec();
 	if (!shop)
-		return res.render('index');
+		return res.render('404');
 
 	var participant = await Participant.findOne({ shop_id: shop._id.toString(), _id: req.params.participantid })
 
 	if (!participant)
-		return res.render('index');
+		return res.render('404');
 
 
 	var products = await Product.find({ shop_id: shop._id.toString() });
 	products.sort((a, b) => a.complete - b.complete)
 
-	return res.render('index2', { shop_name: shop.title, participant_name: participant.name, products: products })
+	return res.render('index', { shop_name: shop.title, participant_name: participant.name, products: products })
 });
 
 
 router.get('/:shopid/:participantid/add_product/:productname', async function (req, res, next) {
 
 	if (!mongoose.isValidObjectId(req.params.shopid) || !mongoose.isValidObjectId(req.params.participantid))
-		return res.render('index');
+		return res.render('404');
 
 	if (!req.params.productname)
-		return res.render('index');
+		return res.render('404');
 
 	var shop = await Shop.findById(req.params.shopid.toString()).exec();
 	if (!shop)
-		return res.render('index');
+		return res.render('404');
 
 	var participant = await Participant.findOne({ shop_id: shop._id.toString(), _id: req.params.participantid })
 
 	if (!participant)
-		return res.render('index');
+		return res.render('404');
 
 	var product = new Product();
 	product.shop_id = shop._id.toString();
@@ -79,19 +79,19 @@ router.get('/admin/:admincode/add_shop/:shopname', async function (req, res, nex
 router.get('/:shopid/:participantid/:action/:productid', async function (req, res, next) {
 
 	if (!mongoose.isValidObjectId(req.params.shopid) || !mongoose.isValidObjectId(req.params.participantid) || !mongoose.isValidObjectId(req.params.productid))
-		return res.render('index');
+		return res.render('404');
 
 	if (!req.params.productid || !req.params.action)
-		return res.render('index');
+		return res.render('404');
 
 	var shop = await Shop.findById(req.params.shopid.toString()).exec();
 	if (!shop)
-		return res.render('index');
+		return res.render('404');
 
 	var participant = await Participant.findOne({ shop_id: shop._id.toString(), _id: req.params.participantid })
 
 	if (!participant)
-		return res.render('index');
+		return res.render('404');
 
 	var product = await Product.findById(req.params.productid).exec();
 	if (!product)
