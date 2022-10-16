@@ -138,6 +138,7 @@ function onListening() {
 }
 
 mongoose.connect(process.env.DATABASE_URL);
+app.set("admin_code", process.env.ADMIN_ACTION_URL_CODE)
 const database = mongoose.connection
 
 database.on('error', (error) => {

@@ -57,6 +57,25 @@ router.get('/:shopid/:participantid/add_product/:productname', async function (r
 	return res.json(product);
 });
 
+router.get('/admin/:admincode/add_participant/:shopid/:participantname', async function (req, res, next) {
+	if(req.params.admincode != req.app.get('admin_code')) return res.sendStatus(401)
+	var p = new Participant({name: req.params.participantname, shop_id: req.params.shopid});
+	p.save();
+	result = {};
+	result['url'] = `${req.hostname}/shop/${req.params.shopid}/${p._id}`;
+	result['participant_id'] = p.id;
+	result['success'] = true;
+	return res.json(result);
+});
+
+router.get('/admin/:admincode/add_shop/:shopname', async function (req, res, next) {
+	console.log(req.app.get('admin_code'));
+	if(req.params.admincode != req.app.get('admin_code')) return res.sendStatus(401)
+	var shop = new Shop({title: req.params.shopname});
+	shop.save();
+	return res.json(shop);
+});
+
 router.get('/:shopid/:participantid/:action/:productid', async function (req, res, next) {
 
 	if (!mongoose.isValidObjectId(req.params.shopid) || !mongoose.isValidObjectId(req.params.participantid) || !mongoose.isValidObjectId(req.params.productid))
@@ -99,17 +118,7 @@ router.get('/:shopid/:participantid/:action/:productid', async function (req, re
 });
 
 
-// router.get('/add/:shopid/:participantid', async function (req, res, next) {
-// 	var p = new Participant({name: req.params.participantid, shop_id: req.params.shopid});
-// 	p.save();
-// 	return res.json(p);
-// });
 
-// router.get('/shop/:shopid/:participantid', async function (req, res, next) {
-// 	var shop = new Shop({title: 'awesome shop'});
-// 	shop.save();
-// 	return res.json(shop);
-// });
 
 
 module.exports = router;
