@@ -63,7 +63,7 @@ No support for SSL certificates. If you wish to serve app with HTTPS you should 
 
 There are no sessions. Everything works directly from URL. This is unsafe but speeds up the development process. This is the next thing I should implement.
 
-#### Why entire page reloads when an event happened?
+#### Why entire page reloads when an event happens?
 
 Well, re-rendering entire list is just easier than dynamically manage the list. Again, another sacrifice for speedy development.
 
