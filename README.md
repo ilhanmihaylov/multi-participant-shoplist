@@ -4,7 +4,7 @@
 [M]ulti [P]articipant [S]hoplist or MPS, is a basic online shopping list tool. In MPS You can create a shopping room or session with multiple participants. When both participants are using the application every change will be reflected to other one's screen. Every participant will be in sync with others.
 
 
-
+![](https://github.com/ilhanmihaylov/multi-participant-shoplist/blob/main/demo.gif)
 
 ## Installation
 
