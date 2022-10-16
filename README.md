@@ -20,7 +20,7 @@
 
 #### Create New Shopping Session
 
-```http
+```
   GET /shop/admin/${admincode}/add_shop/${shop_name}
 ```
 
@@ -31,7 +31,7 @@
 
 #### Add Participant To Session
 
-```http
+```
   GET /shop/admin/${admincode}/add_participant/${shopid}/${participant_name}
 ```
 
